@@ -3,7 +3,6 @@ import './app.css'
 import Tmdb from './tmdb'
 import MovieRow from './components/MovieRow'
 import FeaturedMovie from './components/FeaturedMovie'
-import tmdb from './tmdb'
 
 
 
