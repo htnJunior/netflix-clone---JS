@@ -3,6 +3,7 @@ import './app.css'
 import Tmdb from './tmdb'
 import MovieRow from './components/MovieRow'
 import FeaturedMovie from './components/FeaturedMovie'
+import Header from './components/Header'
 
 
 
@@ -10,6 +11,7 @@ export default () => {
 
   const [movieList, setMovieList] = useState([])
   const [FeaturedData, setFeaturedData] = useState([])
+  const [blackheader, setBlackHeader] = useState(false)
 
   useEffect(() => {
     const loadAll = async () => {
@@ -26,8 +28,25 @@ export default () => {
     loadAll()
   }, [])
 
+  useEffect(() => {
+    const scrollListener = () => {
+      if(window.scrollY > 10){
+        setBlackHeader(true)
+      }else{
+        setBlackHeader(false)
+      }
+    }
+
+    window.addEventListener('scroll', scrollListener)
+    return () => {
+      window.removeEventListener('scroll', scrollListener)
+    }
+  }, [])
+
   return (
     <div className="page">
+
+      <Header black={blackheader}/>
 
       {FeaturedData && 
         <FeaturedMovie item={FeaturedData} />
@@ -38,6 +57,19 @@ export default () => {
           <MovieRow key={key} title={item.title} items={item.items} />
         ))}
       </section>
+      
+      <footer>
+        Feito para fins de estudos por Helington Oliveira<br/>
+        Todos os direitos de imagem para Netflix<br/>
+        Dados retirados do site Themoviedb.org
+        
+      </footer>
+
+      {movieList.length <= 0 &&
+        <div className="loading">
+            <img src="https://www.filmelier.com/pt/br/news/wp-content/uploads/2020/03/netflix-loading.gif"></img>
+        </div>
+      }
     </div>
   )
 }

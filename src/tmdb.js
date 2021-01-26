@@ -28,11 +28,11 @@ export default {
             },
             {
                 slug: 'action',
-                title: 'Açãoo',
+                title: 'Ação',
                 items: await basicFetch(`/discover/movie?with_genres=28&language=pr-BR&api_key=${API_KEY}`)
             },
             {
-                slug: 'comey',
+                slug: 'comedy',
                 title: 'Comédia',
                 items: await basicFetch(`/discover/movie?with_genres=35&language=pr-BR&api_key=${API_KEY}`)
             },
